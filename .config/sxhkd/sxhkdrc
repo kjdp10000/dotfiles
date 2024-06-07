@@ -1,0 +1,71 @@
+# File manager
+super + e
+  pcmanfm
+
+# Brave
+super + {_,shift} + w
+  {brave,firefox}
+
+# Thunderbird
+super + shift + m
+  thunderbird
+
+# Lock , (logout / shutdown)
+super + {shift,control} + l
+  {slock,~/.local/bin/scripts/logout.sh}
+
+# volume up/down
+XF86Audio{RaiseVolume,LowerVolume}
+  {pactl set-sink-volume @DEFAULT_SINK@ +10% && kill -44 $(pidof dwmblocks),pactl set-sink-volume @DEFAULT_SINK@ -10% && kill -44 $(pidof dwmblocks)}
+
+# Mute audio
+XF86AudioMute
+  {pactl set-sink-mute @DEFAULT_SINK@ toggle && kill -44 $(pidof dwmblocks)}
+
+# Brightness up/down 
+XF86MonBrightness{Up,Down}
+  {brightnessctl -d 'amdgpu_bl0' s +10% && kill -38 $(pidof dwmblocks), brightnessctl -d 'amdgpu_bl0' s 10%- && kill -38 $(pidof dwmblocks)}
+
+# Restart sxhkd
+ctrl + super + s
+  pkill sxhkd && sxhkd &
+
+# Calculator (bc) - set the title (-t) so it can be set as floating. xprop stuff!
+super + c
+  terminator -e 'bc -q $HOME/.local/bin/scripts/bc.txt' --geometry 280x440+800+400 -T "calc" -T "calc" &
+
+# Note taker - set the title (-t) so it can be set as floating. xprop stuff!
+super + n
+  terminator -e 'note-make.sh' --geometry 1000x400+450+400 -T "note-maker" -T "note-maker"
+
+# Note taker - For all markdown notes, display a list, the chosen markdown file will be displayed as a PDF
+super + shift + n
+  terminator -e 'note-show.sh' 
+
+# screen-shot
+super + s
+  ~/.local/bin/scripts/screenshot.sh
+
+# email address
+ctrl + shift + E
+    cat ~/.local/bin/email | xclip -sel c
+
+# alternate email address
+alt + shift + E
+    cat ~/.local/bin/email-alt | xclip -sel c
+
+# dual monitor support
+ctrl + super + p
+    ~/.local/bin/scripts/displayselect.sh &
+
+# youtube downloader
+super + {ctrl,alt,shift} + y
+    {~/.local/bin/scripts/yt.sh '-g' &,~/.local/bin/scripts/ytplay.sh &, ~/.local/bin/scripts/ytfzf.sh -D &}
+
+# mount/unmount drive
+super + {_,shift} + F9
+    {~/.local/bin/scripts/mounter &,~/.local/bin/scripts/unmounter &}
+
+# keepassxc
+super + ctrl + k
+    keepassxc

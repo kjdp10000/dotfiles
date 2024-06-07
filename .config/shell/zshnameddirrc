@@ -1,0 +1,2 @@
+hash -d cac=/home/kev/.cache 
+hash -d bf=/home/kev/.config/shell/bm-files 
