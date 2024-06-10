@@ -31,6 +31,8 @@ set wildmode=longest,list,full
 set hlsearch
 set encoding=utf8                       "set encoding so glyphs can be displayed in VIM
 
+set mouse=a                             "enable mouse
+
 hi CursorLineNr cterm=bold
 
 " +------------------+
