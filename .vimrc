@@ -1,13 +1,13 @@
-" VIM config
-" {{{ BASIC SETUP
-" BASIC SETUP:
+" .vimrc
 
-" enter the current millenium
-set nocompatible
+" Basic setup {{{
 
-filetype plugin indent on
+set nocompatible                        " enter the current millenium
+
+filetype plugin indent on               "Filetype detection
 syntax on                               "Syntax highlighting
-set number relativenumber               "Line numbers
+
+set number relativenumber
 set softtabstop=4 tabstop=4
 set shiftwidth=4
 set expandtab                           "convert tabs to space
@@ -19,26 +19,24 @@ set incsearch                           "display search results as you type
 set title
 set ruler
 set showcmd                             "Show commmand
-"set cursorline                         "highlight the cursor location
-filetype indent on                      "Filetype detection
 set showmatch                           "Highlight matching brackets
 set wildmenu                            "Better command-line completion
-set wildmode=longest,list,full
-"set relativenumber                      "Relative numbering 
-
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
+set wildmode=longest,list,full          "Auto completion
 set hlsearch
 set encoding=utf8                       "set encoding so glyphs can be displayed in VIM
-
 set mouse=a                             "enable mouse
+set splitbelow splitright               "open new window right/below
+
 
 hi CursorLineNr cterm=bold
 
-" +------------------+
-" |  Key bindings    |
-" +------------------+
-let mapleader = " "                     "map leader to Space
+" }}}
+" Leader {{{
+
+let mapleader = ","
+
+" }}}
+" Key bindings {{{
 
 inoremap jj <Esc> 
 
@@ -52,18 +50,36 @@ nnoremap <C-L> :nohl<CR><C-L>
 " split: moving between windows
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
+map <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" +-------------------------+
-" | Leader Key bindings  	|
-" +-------------------------+
 " turn off highlighting
 map <leader>h :noh<CR>
 map <leader>H :set hlsearch<CR>
-nnoremap <Leader>+ :vertical resize +5<CR>
-nnoremap <Leader>- :vertical resize -5<CR>
+
+" nnoremap <Leader>+ :vertical resize +5<CR>
+" nnoremap <Leader>- :vertical resize -5<CR>
+nnoremap <c-left> :vertical resize +5<CR>
+nnoremap <c-right> :vertical resize -5<CR>
+nnoremap <c-up> :horizontal resize +5<CR>
+nnoremap <c-down> :horizontal resize -5<CR>
+
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
+
 nnoremap <leader>u :UndotreeShow<CR>
+
+" change case
+nnoremap <Leader>uu gUiw
+inoremap <Leader>uu <esc>gUiwea
+nnoremap <Leader>ll guiw
+inoremap <Leader>ll <esc>guiwea
+
+" substitute
+nnoremap <leader>s :%s//<left>
+
+" vimdiff off
+nnoremap <leader>vd :diffoff!<cr>
 
 " add quotes around word
 :nnoremap <Leader>"" ciw""<Esc>P
@@ -71,16 +87,40 @@ nnoremap <leader>u :UndotreeShow<CR>
 :nnoremap <Leader>qd daW"=substitute(@@,"'\\\|\"","","g")<CR>P
 :vnoremap <leader>" c""<esc>P
 
+" Check file in shellcheck:
+map <leader>sc :set spell!<CR>
+
+" }}}
+" ASCII art {{{
 " makes Ascii art font
 nmap <leader>F :.!toilet -w 200 -f standard<CR>
 nmap <leader>f :.!toilet -w 200 -f small<CR>
 " makes Ascii border
 nmap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 
+" }}}
+" theme {{{
+" https://draculatheme.com/vim
+if v:version < 802
+    packadd! dracula
+endif
+syntax enable
+colorscheme dracula
 
-" +-------------------------+
-" | macros                	|
-" +-------------------------+
-"let @q='ctrl + r ctrl + r q'
-" replace single quotes with double quotes
+" }}} 
+" folding {{{
+set foldlevelstart=0
+set foldcolumn=1
+set foldmethod=marker
+nnoremap <Space> za
+vnoremap <Space> za
+
+set foldtext=MyFoldText()
+function MyFoldText()
+    let line = getline(v:foldstart)
+    let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+    return v:folddashes .. sub
+endfunction
+
+" }}}
 
