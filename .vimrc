@@ -112,8 +112,8 @@ colorscheme dracula
 set foldlevelstart=0
 set foldcolumn=1
 set foldmethod=marker
-nnoremap <Space> za
-vnoremap <Space> za
+nnoremap <leader><Space> za
+vnoremap <leader><Space> za
 
 set foldtext=MyFoldText()
 function MyFoldText()
