@@ -60,7 +60,7 @@ ctrl + super + p
 
 # youtube downloader
 super + {ctrl,alt,shift} + y
-    {~/.local/bin/scripts/yt.sh '-g' &,~/.local/bin/scripts/ytplay.sh &, ~/.local/bin/scripts/ytfzf.sh -D &}
+    {~/.local/bin/scripts/yt.sh '-g' &,~/.local/bin/scripts/ytplay.sh &, ~/.local/bin/ytfzf/ytfzf/ytfzf -D &}
 
 # mount/unmount drive
 super + {_,shift} + F9
