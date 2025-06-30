@@ -37,7 +37,8 @@ super + c
 
 # Note taker - set the title (-t) so it can be set as floating. xprop stuff!
 super + n
-  terminator -e 'note-make.sh' --geometry 1000x400+450+400 -T "note-maker" -T "note-maker"
+  st -g 140x30+200+200 -T "note-maker" -T "note-maker" -e note-make.sh 
+#  terminator -e 'note-make.sh' --geometry 1000x400+450+400 -T "note-maker" -T "note-maker"
 
 # Note taker - For all markdown notes, display a list, the chosen markdown file will be displayed as a PDF
 super + shift + n
