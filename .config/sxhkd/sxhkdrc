@@ -32,7 +32,8 @@ ctrl + super + s
 
 # Calculator (bc) - set the title (-t) so it can be set as floating. xprop stuff!
 super + c
-  terminator -e 'bc -q $HOME/.local/bin/scripts/bc.txt' --geometry 280x440+800+400 -T "calc" -T "calc" &
+  st -g 25x20+100+250 -t "calc" -e bc -q $HOME/.local/bin/scripts/bc.txt &
+#  terminator -e 'bc -q $HOME/.local/bin/scripts/bc.txt' --geometry 280x440+800+400 -T "calc" -T "calc" &
 
 # Note taker - set the title (-t) so it can be set as floating. xprop stuff!
 super + n
@@ -40,7 +41,8 @@ super + n
 
 # Note taker - For all markdown notes, display a list, the chosen markdown file will be displayed as a PDF
 super + shift + n
-  terminator -e 'note-show.sh' 
+  'note-show.sh' 
+#  st -e 'note-show.sh' & 
 
 # screen-shot
 super + s
